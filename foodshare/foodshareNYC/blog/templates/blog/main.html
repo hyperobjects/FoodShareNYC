@@ -7,33 +7,6 @@ calculate distance
 
 {% block content %}
 
-<button onclick="getLocation()">Locate</button>
-
-<p id="unsupported"></p>
-
-{% block javascript %}
-
-  <script type="text/javascript">
-
-    var x = document.getElementById("unsupported");
-
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.watchPosition(showPosition);
-        } else {
-          x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-      }
-
-      function showPosition(position) {
-          x.innerHTML="Latitude: " + position.coords.latitude +
-          "<br>Longitude: " + position.coords.longitude;
-      }
-
-  </script>  
-
-{% endblock %}
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -45,7 +18,7 @@ calculate distance
         </button>
       </div>
       <div class="modal-body">
-        {{ distance }} 
+        {{ distance }}
       </div>
     </div>
   </div>
@@ -59,8 +32,8 @@ calculate distance
     <button type="submit" class="btn btn-primary">confirm</button>
 </form>
 <br>
-This product includes GeoLite2 data created by MaxMind, available from
-<a href="https://www.maxmind.com">https://www.maxmind.com</a>.
+<!-- This product includes GeoLite2 data created by MaxMind, available from
+<a href="https://www.maxmind.com">https://www.maxmind.com</a>. -->
 
 {% if request.POST and distance is not None %}
     <script>
@@ -69,5 +42,32 @@ This product includes GeoLite2 data created by MaxMind, available from
         })
     </script>
 {% endif %}
+
+<!-- Location finder button -->
+<button onclick="getLocation()">Locate</button>
+<p id="unsupported"></p>
+
+{% block javascript %}
+
+  <script type="text/javascript">
+
+    var x = document.getElementById("unsupported");
+    var y = document.getElementById("id_destination");
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.watchPosition(showPosition);
+        } else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+
+      function showPosition(position) {
+          y.value=position.coords.latitude + "," + position.coords.longitude;
+      }
+
+  </script>
+
+{% endblock %}
 
 {% endblock content %}
