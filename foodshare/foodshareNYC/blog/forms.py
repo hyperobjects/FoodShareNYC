@@ -7,7 +7,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = [
-        'title', 'content', 'image']
+        'title', 'image', 'content',  'location']
 
 class MeasurementModelForm(forms.ModelForm):
     class Meta:
