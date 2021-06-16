@@ -1,10 +1,21 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+#from django.contrib.auth.models import User
+
 from PIL import Image
+
 # Create your models here.
 
+
+
+class CustomUser(AbstractUser):
+	location = models.CharField(max_length=100)
+	class Meta:
+		db_table = 'auth_user'
+
+
 class Profile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 	image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 	#location = 
 	def __str__(self):

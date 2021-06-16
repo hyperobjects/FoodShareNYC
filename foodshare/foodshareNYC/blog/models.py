@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from users.models import CustomUser
 from django.utils import timezone
 from django.urls import reverse 
 from django.db import models
@@ -15,7 +16,7 @@ class Post(models.Model):
 	content = models.TextField()
 	location = models.CharField(max_length=100, blank=True, null=True)	
 	date_posted = models.DateTimeField(default=timezone.now)
-	author = models.ForeignKey(User, on_delete=models.CASCADE)
+	author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
 
 

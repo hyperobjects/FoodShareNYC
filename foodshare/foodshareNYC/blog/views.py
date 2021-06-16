@@ -8,7 +8,11 @@ import folium
 import socket
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+#from django.contrib.auth import get_user_model
+#User = get_user_model()
+
+from users.models import CustomUser
 
 
 def home(request):
@@ -33,7 +37,7 @@ class UserPostListView(ListView):
 	paginate_by = 5 
 
 	def get_queryset(self):
-		user = get_object_or_404(User, username=self.kwargs.get('username'))
+		user = get_object_or_404(CustomUser, username=self.kwargs.get('username'))
 		return Post.objects.filter(author=user).order_by('-date_posted')
 
 
@@ -41,11 +45,11 @@ class UserPostListView(ListView):
 
 class PostDetailView(DetailView):
 	model = Post
-	fields = ['title', 'image', 'content', 'location']
+	fields = ['title', 'image', 'content']
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'image', 'content', 'location']
+    fields = ['title', 'image', 'content']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -53,7 +57,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content', 'image', 'location']
+    fields = ['title', 'content', 'image',]
 
     def form_valid(self, form):
         form.instance.author = self.request.user

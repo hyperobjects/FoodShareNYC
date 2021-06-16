@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     #'djangoratings',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
-    'crispy_forms'
+    'crispy_forms',
 
 ]
 
@@ -152,3 +152,5 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
  
+
+AUTH_USER_MODEL = 'users.CustomUser'
