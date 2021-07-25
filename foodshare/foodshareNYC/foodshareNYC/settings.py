@@ -1,4 +1,6 @@
-import os 
+import os
+from django.utils.translation import ugettext_lazy as _ 
+
 """
 Django settings for foodshareNYC project.
 
@@ -40,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'djangoratings',
+    'star_ratings',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
@@ -154,3 +156,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
  
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+
+SCORE_CHOICES = (
+    (1.0, _(u"*")),
+    (2.0, _(u"**")),
+    (3.0, _(u"***")),
+    (4.0, _(u"****")),
+    (5.0, _(u"*****")),
+)
+
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 15),
+        ("mapCenterLocationName", "new york"),
+        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'us'}}),
+        ("markerFitZoom", 12),
+    ),
+    "GOOGLE_MAP_API_KEY": "<AIzaSyCRrPa1qtG-e-Q1S1blmkbxqUkoMpbfB8Y>"
+}

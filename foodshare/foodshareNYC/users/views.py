@@ -48,7 +48,7 @@ def profile(request):
     
     distance = None
     destination = None
-
+    
 
 
     obj = get_object_or_404(Measurement, id=5)
@@ -65,6 +65,7 @@ def profile(request):
     #l_lat = 40.7008715
     l_lon = lon
     #l_lon = -73.9395218
+
     pointA = (l_lat, l_lon)
 
     # initial folium map
